@@ -1,0 +1,17 @@
+name = "BlrPcp"
+defaultTargets = ["BlrPcp"]
+
+[leanOptions]
+warn.sorry = false
+
+[[require]]
+name = "LeanArchitect"
+git = "https://github.com/hanwenzhu/LeanArchitect.git"
+rev = "main"
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+
+[[lean_lib]]
+name = "BlrPcp"
