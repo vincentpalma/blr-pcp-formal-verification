@@ -1,3 +1,5 @@
+.venv/
 .lake/
 blueprint/print/
-blueprint/web/.venv/
+blueprint/web/
+env/

@@ -26,22 +26,27 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y graphviz libgraphviz-dev pkg-config python3-dev
+
       - name: Install blueprint dependencies
         run: |
           python -m venv env
           . env/bin/activate
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip setuptools wheel
           python -m pip install leanblueprint
 
       - name: Build Lean project
-        uses: leanprover/lean-action@v1.4.0
+        uses: leanprover/lean-action@v1
         with:
           build: true
           lint: false
           mk_all-check: false
           use-github-cache: false
 
-      - name: Generate LeanArchitect files
+      - name: Generate LeanArchitect blueprint files
         run: ~/.elan/bin/lake build :blueprint
 
       - name: Build blueprint web
