@@ -3,12 +3,12 @@
 % The template includes standard AMS packages.
 % It is otherwise a very minimal preamble (you should probably at least
 % add cleveref and tikz-cd).
-% This file makes a web version of the blueprint
+
 \documentclass{report}
 
 \usepackage{amssymb, amsthm, amsmath}
 \usepackage{hyperref}
-\usepackage[showmore, dep_graph, dep_by=chapter]{blueprint}
+\usepackage[showmore, dep_graph]{blueprint}
 
 \input{macros/common}
 \input{macros/web}
@@ -22,6 +22,5 @@
 
 \begin{document}
 \maketitle
-\tableofcontents
 \input{content}
 \end{document}
