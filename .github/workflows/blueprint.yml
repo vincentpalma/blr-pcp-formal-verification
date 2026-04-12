@@ -1,4 +1,4 @@
-name: Compile blueprint
+name: Publish site
 
 on:
   push:
@@ -15,13 +15,17 @@ permissions:
   id-token: write
 
 jobs:
-  build_project:
+  build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout project
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -48,18 +52,42 @@ jobs:
           mk_all-check: false
           use-github-cache: false
 
-      - name: Generate LeanArchitect blueprint files
+      - name: Generate LeanArchitect files
         run: ~/.elan/bin/lake build :blueprint
 
-      - name: Build blueprint web
+      - name: Build blueprint web and pdf
         run: |
           . env/bin/activate
           leanblueprint web
+          leanblueprint pdf
+
+      - name: Build homepage with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./home_page
+          destination: ./_site
+
+      - name: Merge blueprint into site
+        run: |
+          mkdir -p _site/blueprint
+          cp -R blueprint/web/* _site/blueprint/
+          cp blueprint/print/print.pdf _site/blueprint.pdf
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: blueprint/web
+          path: ./_site
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4

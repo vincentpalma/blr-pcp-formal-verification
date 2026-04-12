@@ -19,16 +19,15 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Formal Verification of BLR PCP
-#email: your-email@example.com
 description: by yuxi-zheng
-baseurl: "/blr-pcp-formal-verification" # the subpath of your site, e.g. /blog
-url: "https://yuxi-zheng.github.io/blr-pcp-formal-verification" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username:
+baseurl: "/blr-pcp-formal-verification"
+url: "https://yuxi-zheng.github.io"
 github_username: yuxi-zheng
 repository: yuxi-zheng/blr-pcp-formal-verification
 
-# Build settings
-remote_theme: pages-themes/cayman@v0.2.0 
+remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
   - jekyll-github-metadata
+
+  
