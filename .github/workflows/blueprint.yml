@@ -11,6 +11,8 @@ concurrency:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build_project:
@@ -53,3 +55,11 @@ jobs:
         run: |
           . env/bin/activate
           leanblueprint web
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: blueprint/web
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
