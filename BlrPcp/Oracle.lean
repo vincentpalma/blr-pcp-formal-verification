@@ -25,8 +25,7 @@ abbrev QESAT : Set (List (CMvPolynomial n F)) := fun polys =>
 
 namespace QESAT
 /-- The size of a QESAT instance if it was a binary string
-    TODO: the proper way would be to use this: https://leanprover-community.github.io/mathlib4_docs/Mathlib/Computability/Encoding.html
-    This is only important for time complexity. -/
+    TODO: the proper way would be to use this: https://leanprover-community.github.io/mathlib4_docs/Mathlib/Computability/Encoding.html -/
 def size (polys : List (CMvPolynomial n F)) : ℕ :=
   polys.length * (n + 1)^2
 end QESAT
@@ -77,7 +76,7 @@ abbrev PCPProver (α : Type) (F : Type) (n : ℕ) : Type :=
 abbrev PCPVerifier (α : Type) (F : Type) (n : ℕ) : Type :=
   α → OracleComp (RandOracle.spec + (Fin n →ₒ F)) Bool
 
-/- TODO: Runtime bound of a computation `V(x)` -/
+/-- TODO: Runtime bound of a computation `V(x)` -/
 def RunsInTime {α : Type} {F : Type} {n : ℕ} (_ : PCPVerifier α F n) (_ : α) (_ : ℕ) : Prop :=
   true
 
